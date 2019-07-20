@@ -10,12 +10,14 @@ const userTwoId = new ObjectID();
 
 const todos = [{
     _id: userOneId,
-    text: "first test todo"
+    text: "first test todo",
+    _creator: userOneId
 }, {
     _id: new ObjectID(),
     text: "second test todo",
     completed:true,
-    completedAt:122314213
+    completedAt:122314213,
+    _creator:userTwoId
 }];
 
 const users = [{
@@ -29,7 +31,11 @@ const users = [{
 },{
     _id:userTwoId,
     email: 'safari@gmail.com',
-    password: 'password2'
+    password: 'password2',
+    tokens: [{
+        access: 'auth',
+        token: jwt.sign({_id: userTwoId,access: 'auth'},'pokerface123').toString()
+    }]
 }];
 
 const populateTodos = (done)=>{
